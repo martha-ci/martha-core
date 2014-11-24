@@ -1,0 +1,30 @@
+Martha\Core\Domain\Entity\Step:
+  type: entity
+  table: steps
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    command:
+      type: text
+    stopOnFailure:
+      type: boolean
+      column: stop_on_failure
+    markBuildFailed:
+      type: boolean
+      column: mark_build_failed
+    returnStatus:
+      column: return_status
+      type: integer
+      nullable: true
+  manyToOne:
+      build:
+        targetEntity: Martha\Core\Domain\Entity\Build
+        inversedBy: steps
+        joinColumn:
+          name: build_id
+          referencedColumnName: id
+          nullable: false
+          onDelete: CASCADE

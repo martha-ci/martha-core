@@ -1,0 +1,37 @@
+Martha\Core\Domain\Entity\User:
+  type: entity
+  table: users
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    fullName:
+      column: full_name
+      length: 100
+      nullable: true
+    alias:
+      column: alias
+      length: 100
+      nullable: true
+    password:
+      type: text
+      nullable: true
+    publicKey:
+      column: public_key
+      type: text
+    privateKey:
+      column: private_key
+      type: text
+    created:
+      type: datetime
+  oneToMany:
+    emails:
+      targetEntity: Martha\Core\Domain\Entity\User\Email
+      mappedBy: user
+      cascade: ["persist", "remove"]
+    tokens:
+      targetEntity: Martha\Core\Domain\Entity\User\Token
+      mappedBy: user
+      cascade: ["persist", "remove"]

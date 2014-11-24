@@ -1,0 +1,20 @@
+Martha\Core\Domain\Entity\Artifact:
+  type: entity
+  table: artifacts
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    helper:
+    file:
+  manyToOne:
+      build:
+        targetEntity: Martha\Core\Domain\Entity\Build
+        inversedBy: artifacts
+        joinColumn:
+          name: build_id
+          referencedColumnName: id
+          nullable: false
+          onDelete: CASCADE

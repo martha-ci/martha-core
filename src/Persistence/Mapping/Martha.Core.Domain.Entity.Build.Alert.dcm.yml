@@ -1,0 +1,28 @@
+Martha\Core\Domain\Entity\Build\Alert:
+  type: entity
+  table: build_alerts
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    type:
+      length: 20
+    description:
+  manyToOne:
+    build:
+      targetEntity: Martha\Core\Domain\Entity\Build
+      inversedBy: alerts
+      joinColumn:
+        name: build_id
+        referencedColumnName: id
+        nullable: false
+        onDelete: CASCADE
+    plugin:
+      targetEntity: Martha\Core\Domain\Entity\Plugin
+      joinColumn:
+        name: plugin_id
+        referencedColumnName: id
+        nullable: true
+        onDelete: CASCADE

@@ -1,0 +1,37 @@
+Martha\Core\Domain\Entity\Plugin:
+  type: entity
+  table: plugins
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    name:
+      length: 100
+    description:
+      type: text
+      nullable: true
+    key:
+      length: 100
+    author:
+      length: 100
+    version:
+      length: 20
+    updateableVersion:
+      column: updateable_version
+      length: 20
+      nullable: true
+    updateableVersionNotes:
+      column: updateable_version_notes
+      type: text
+      nullable: true
+    enabled:
+      type: boolean
+      nullable: true
+    created:
+      type: datetime
+    lastEnabled:
+      column: last_enabled
+      type: datetime
+      nullable: true

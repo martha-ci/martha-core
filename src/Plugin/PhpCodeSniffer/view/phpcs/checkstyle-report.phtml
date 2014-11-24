@@ -1,0 +1,25 @@
+
+<?php if (!$this->violations): ?>
+<p>
+    No PHP CodeSniffer violations were detected in this build.
+</p>
+<?php else: ?>
+<p>
+    The following PHP CodeSniffer violations were detected during this build:
+</p>
+
+<ol>
+    <?php foreach ($this->violations as $fileName => $errors): ?>
+    <li>
+        <strong><?= $fileName ?></strong>:
+        <ol>
+            <?php foreach ($errors as $error): ?>
+            <li>
+                <?= $error ?>
+            </li>
+            <?php endforeach; ?>
+        </ol>
+    </li>
+    <?php endforeach; ?>
+</ol>
+<?php endif; ?>

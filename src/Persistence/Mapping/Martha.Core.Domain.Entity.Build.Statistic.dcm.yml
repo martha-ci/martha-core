@@ -1,0 +1,28 @@
+Martha\Core\Domain\Entity\Build\Statistic:
+  type: entity
+  table: build_statistics
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    name:
+    value:
+      type: text
+  manyToOne:
+      build:
+        targetEntity: Martha\Core\Domain\Entity\Build
+        inversedBy: statistics
+        joinColumn:
+          name: build_id
+          referencedColumnName: id
+          nullable: false
+          onDelete: CASCADE
+      plugin:
+        targetEntity: Martha\Core\Domain\Entity\Plugin
+        joinColumn:
+          name: plugin_id
+          referencedColumnName: id
+          nullable: true
+          onDelete: CASCADE

@@ -1,0 +1,35 @@
+Martha\Core\Domain\Entity\Build\BuildException:
+  type: entity
+  table: build_exceptions
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    type:
+      length: 100
+    message:
+      type: text
+      nullable: true
+    asset:
+      nullable: true
+    reference:
+      nullable: true
+    url:
+      nullable: true
+  manyToOne:
+      build:
+        targetEntity: Martha\Core\Domain\Entity\Build
+        inversedBy: exceptions
+        joinColumn:
+          name: build_id
+          referencedColumnName: id
+          nullable: false
+          onDelete: CASCADE
+      plugin:
+        targetEntity: Martha\Core\Domain\Entity\Plugin
+        joinColumn:
+          name: plugin_id
+          referencedColumnName: id
+          onDelete: CASCADE

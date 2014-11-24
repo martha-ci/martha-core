@@ -1,0 +1,72 @@
+Martha\Core\Domain\Entity\Build:
+  type: entity
+  table: builds
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    branch:
+      length: 100
+      nullable: true
+    fork:
+      length: 100
+      nullable: true
+    forkUri:
+      column: fork_uri
+      nullable: true
+    message:
+      type: text
+      nullable: true
+    author:
+      nullable: true
+    method:
+      length: 100
+      nullable: true
+    revisionNumber:
+      column: revision_number
+      length: 255
+      nullable: true
+    metadata:
+      type: hash
+      nullable: true
+    status:
+      length: 40
+    created:
+      type: datetime
+  oneToMany:
+    steps:
+      targetEntity: Martha\Core\Domain\Entity\Step
+      mappedBy: build
+      cascade: ["persist"]
+    statistics:
+      targetEntity: Martha\Core\Domain\Entity\Build\Statistic
+      mappedBy: build
+      cascade: ["persist"]
+    alerts:
+      targetEntity: Martha\Core\Domain\Entity\Build\Alert
+      mappedBy: build
+      cascade: ["persist"]
+    exceptions:
+      targetEntity: Martha\Core\Domain\Entity\Build\BuildException
+      mappedBy: build
+      cascade: ["persist"]
+    artifacts:
+      targetEntity: Martha\Core\Domain\Entity\Artifact
+      mappedBy: build
+      cascade: ["persist"]
+  manyToOne:
+    project:
+      targetEntity: Martha\Core\Domain\Entity\Project
+      inversedBy: builds
+      joinColumn:
+        name: project_id
+        referencedColumnName: id
+        nullable: false
+        onDelete: CASCADE
+    parent:
+      targetEntity: Martha\Core\Domain\Entity\Build
+      joinColumn:
+        name: parent_id
+        referencedColumnName: id

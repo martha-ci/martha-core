@@ -1,0 +1,9 @@
+<p class="text-center">
+    <?php if ($this->violations == 0): ?>
+    <span class="label label-success">No Violations!</span>
+    <?php elseif ($this->violations < 20): ?>
+    <span class="label label-warning">(<?= $this->violations ?>) Violations...</span>
+    <?php else: ?>
+    <span class="label label-danger">(<?= $this->violations ?>) Violations...</span>
+    <?php endif; ?>
+</p>

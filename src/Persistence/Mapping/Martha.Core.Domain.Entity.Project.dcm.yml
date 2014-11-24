@@ -1,0 +1,33 @@
+Martha\Core\Domain\Entity\Project:
+  type: entity
+  table: projects
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    name:
+      length: 100
+    description:
+      type: text
+      nullable: true
+    scm:
+      length: 50
+    uri:
+    private:
+      column: is_private
+      type: boolean
+    created:
+      type: datetime
+  oneToMany:
+    builds:
+      targetEntity: Martha\Core\Domain\Entity\Build
+      mappedBy: project
+  manyToOne:
+    createdBy:
+      targetEntity: Martha\Core\Domain\Entity\User
+      joinColumn:
+        name: created_by_id
+        referencedColumnName: id
+        nullable: false

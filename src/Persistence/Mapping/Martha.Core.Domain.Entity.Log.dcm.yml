@@ -1,0 +1,17 @@
+Martha\Core\Domain\Entity\Log:
+  type: entity
+  table: logs
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    level:
+      length: 30
+    message:
+      type: text
+    read:
+      type: boolean
+    created:
+      type: datetime

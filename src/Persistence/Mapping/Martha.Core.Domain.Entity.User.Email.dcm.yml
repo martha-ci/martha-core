@@ -1,0 +1,19 @@
+Martha\Core\Domain\Entity\User\Email:
+  type: entity
+  table: user_emails
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: IDENTITY
+  fields:
+    email:
+  manyToOne:
+    user:
+      targetEntity: Martha\Core\Domain\Entity\User
+      inversedBy: emails
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+        nullable: false
+        onDelete: CASCADE

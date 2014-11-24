@@ -27,11 +27,11 @@
     "require": {
         "php": ">=5.5",
         "psr/log": "~1.0",
-        "symfony/yaml": "2.3.*",
         "doctrine/orm": "2.*",
-        "chrisboulton/php-resque": "~1.2",
         "robmorgan/phinx": "~0.3",
         "symfony/http-foundation": "~2.5",
+        "symfony/process": "~2.5",
+        "symfony/yaml": "2.3.*",
         "phpseclib/phpseclib": "~0.3@dev"
     }
 }

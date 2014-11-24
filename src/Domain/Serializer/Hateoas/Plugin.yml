@@ -1,0 +1,7 @@
+Martha\Core\Domain\Entity\Plugin:
+  relations:
+    -
+      rel: self
+      href: "expr('/api/plugins/' ~ object.getId())"
+      attributes:
+          type: application/json
