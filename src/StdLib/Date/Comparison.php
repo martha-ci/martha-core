@@ -1,10 +1,10 @@
 <?php
 
-namespace Martha\StdLib\Date;
+namespace Martha\Core\StdLib\Date;
 
 /**
  * Class Comparison
- * @package Martha\StdLib\Date
+ * @package Martha\Core\StdLib\Date
  */
 class Comparison
 {
