@@ -95,7 +95,7 @@ class PluginManager
         // todo fixme this isn't the place to store the logic for generating this URL...
         $config['callback-url'] = $this->getSystem()->getSiteUrl() . '/login/oauth-callback/' . $plugin->getName();
 
-        $this->authenticationProviders[] = new $provider($plugin, $plugin->getConfig());
+        $this->authenticationProviders[] = new $provider($plugin, $config);
         return $this;
     }
 
