@@ -72,13 +72,12 @@ class PluginManager
     /**
      * Allows a plugin to register a RemoteProjectProvider.
      *
-     * @param AbstractPlugin $plugin
-     * @param string $provider
+     * @param AbstractRemoteProjectProvider $provider
      * @return $this
      */
-    public function registerRemoteProjectProvider(AbstractPlugin $plugin, $provider)
+    public function registerRemoteProjectProvider(AbstractRemoteProjectProvider $provider)
     {
-        $this->remoteProjectProviders[] = new $provider($plugin);
+        $this->remoteProjectProviders[] = $provider;
         return $this;
     }
 
