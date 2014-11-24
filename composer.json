@@ -1,5 +1,5 @@
 {
-    "name": "martha-ci/martha",
+    "name": "martha-ci/martha-core",
     "description": "Martha CI Core Libraries",
     "type": "library",
     "keywords": ["continuous integration", "build server", "builds"],
