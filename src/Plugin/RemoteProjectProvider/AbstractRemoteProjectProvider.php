@@ -58,11 +58,12 @@ abstract class AbstractRemoteProjectProvider
     abstract public function getProjectInformation(User $user, $identifier);
 
     /**
+     * @param string $event
      * @param Project $project
      * @param int $projectType
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function onProjectCreated(Project $project, $projectType)
+    public function onProjectCreated($event, Project $project, $projectType)
     {
     }
 }
