@@ -1,0 +1,37 @@
+{
+    "name": "martha-ci/martha",
+    "description": "Martha CI Core Libraries",
+    "type": "library",
+    "keywords": ["continuous integration", "build server", "builds"],
+    "homepage": "http://github.com/martha-ci",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kristopher Wilson",
+            "email": "kristopherwilson@gmail.com",
+            "homepage": "http://kristopherwilson.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Martha\\Core\\": ["src/", "tests/"]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "~4.3",
+        "squizlabs/php_codesniffer": "~1.5"
+    },
+    "require": {
+        "php": ">=5.5",
+        "psr/log": "~1.0",
+        "symfony/yaml": "2.3.*",
+        "doctrine/orm": "2.*",
+        "chrisboulton/php-resque": "~1.2",
+        "robmorgan/phinx": "~0.3",
+        "symfony/http-foundation": "~2.5",
+        "phpseclib/phpseclib": "~0.3@dev"
+    }
+}
