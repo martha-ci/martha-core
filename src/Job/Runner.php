@@ -3,16 +3,16 @@
 namespace Martha\Core\Job;
 
 use Martha\Core\Domain\Entity\Artifact;
+use Martha\Core\Domain\Entity\Build;
 use Martha\Core\Domain\Entity\Step;
 use Martha\Core\Domain\Repository\BuildRepositoryInterface;
 use Martha\Core\Plugin\ArtifactHandlers\BuildStatisticInterface;
 use Martha\Core\Service\Build\Environment;
+use Martha\Core\Scm\Provider\AbstractProvider;
+use Martha\Core\Scm\Provider\ProviderFactory;
 use Martha\Core\System;
-use Martha\Scm\Provider\AbstractProvider;
 use Martha\StdLib\Date\Comparison;
 use Symfony\Component\Yaml\Yaml;
-use Martha\Core\Domain\Entity\Build;
-use Martha\Scm\Provider\ProviderFactory;
 
 /**
  * Class Runner
