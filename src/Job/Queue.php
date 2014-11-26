@@ -51,14 +51,9 @@ class Queue
                 $this->maxBuildsInProgress - count($building)
             );
 
-            $script = getcwd() . '/bin/martha.php';
-
-            /**
-             * @var Build $build
-             */
             foreach ($pending as $build) {
                 // Find a cleaner, more graceful way to do this:
-                exec('php ' . $script . ' ' . $build->getId() . ' > /dev/null &');
+                exec('./bin/martha ' . $build->getId() . ' > /dev/null &');
             }
         }
     }
