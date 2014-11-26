@@ -97,7 +97,7 @@ class Environment
     public function runCommand($command, callable $callback = null)
     {
         $command = $this->wrapCommandInSshAgent($command);
-
+ 
         $process = new Process($command);
         $process->run($callback);
 
@@ -112,7 +112,7 @@ class Environment
     {
         if ($this->privateKeyFile) {
             $sshAdd = 'ssh-add ' . $this->privateKeyFile;
-            $command = 'ssh-agent ' . $_SERVER['SHELL'] . ' -c \'' . $sshAdd . '; ' . addslashes($command) . '\'';
+            $command = 'ssh-agent ' . (getenv('SHELL') ?: 'bash') . ' -c \'' . $sshAdd . '; ' . addslashes($command) . '\'';
         }
 
         return $command;
