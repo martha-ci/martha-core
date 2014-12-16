@@ -87,6 +87,14 @@ class System
     }
 
     /**
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
      * Get the PluginManager.
      *
      * @return PluginManager

@@ -12,6 +12,7 @@ use Martha\Core\Scm\Provider\AbstractProvider;
 use Martha\Core\Scm\Provider\ProviderFactory;
 use Martha\Core\System;
 use Martha\Core\StdLib\Date\Comparison;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -381,21 +382,42 @@ class Runner
     {
         $command = $this->parseBuildScriptLine($command);
 
+        $config = $this->system->getConfig();
+
         $this->log("<strong>$ {$command}</strong>");
 
-        $proc = proc_open(
-            $command,
-            [
-                '1' => ['file', $this->outputFile, 'a'],
-                '2' => ['file', $this->outputFile, 'a'],
-            ],
-            $pipes,
-            $this->workingDir
-        );
+        $process = new Process($command);
+        //$process->setTty(true);
 
-        $return = proc_close($proc);
+        if (isset($config['env']) && isset($config['env']['path'])) {
+            $process->setEnv([
+                'PATH' => $config['env']['path']
+            ]);
+        }
 
-        return $return;
+        $process->run(function ($type, $buffer) {
+            echo "FOOOO";
+            file_put_contents($this->outputFile, $buffer, FILE_APPEND);
+        });
+
+        return $process->getExitCode();
+
+//        $proc = proc_open(
+//            $command,
+//            [
+//                '1' => ['file', $this->outputFile, 'a'],
+//                '2' => ['file', $this->outputFile, 'a'],
+//            ],
+//            $pipes,
+//            $this->workingDir,
+//            [
+//                'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+//            ]
+//        );
+//
+//        $return = proc_close($proc);
+//
+//        return $return;
     }
 
     /**
