@@ -143,6 +143,11 @@ class System
         return self::$instance;
     }
 
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
     /**
      * Get an instance of the Martha core system.
      *

@@ -12,6 +12,7 @@ use Martha\Core\Scm\Provider\AbstractProvider;
 use Martha\Core\Scm\Provider\ProviderFactory;
 use Martha\Core\System;
 use Martha\Core\StdLib\Date\Comparison;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -137,7 +138,7 @@ class Runner
             $this->parseBuildArtifacts($build, $script['artifacts']);
         }
 
-        $this->cleanupBuild($build);
+        //$this->cleanupBuild($build);
 
         $wasSuccessful = $this->wasBuildSuccessful($status);
         $this->completeBuild($build, $wasSuccessful);
@@ -266,6 +267,8 @@ class Runner
         $this->outputFile = $this->outputDir . '/console.html';
         touch($this->outputFile);
 
+        $this->log('Working Directory: ' . $this->workingDir);
+
         $this->scm = ProviderFactory::createForBuild($build);
         $this->scm->setEnvironment($environment);
         $this->scm->setLogFile($this->outputFile);
@@ -380,22 +383,24 @@ class Runner
     protected function runCommand($command)
     {
         $command = $this->parseBuildScriptLine($command);
+        $config = $this->system->getConfig();
 
         $this->log("<strong>$ {$command}</strong>");
+       
+        $process = new Process($command, $this->workingDir);
+        $process->setTimeout(10 * 60);
 
-        $proc = proc_open(
-            $command,
-            [
-                '1' => ['file', $this->outputFile, 'a'],
-                '2' => ['file', $this->outputFile, 'a'],
-            ],
-            $pipes,
-            $this->workingDir
-        );
+        if (isset($config['env']) && isset($config['env']['path'])) {
+            $env = $_SERVER;
+            $env['PATH'] = $config['env']['path'];
+            $process->setEnv($env);
+        }
 
-        $return = proc_close($proc);
+        $process->run(function ($type, $buffer) {
+            file_put_contents($this->outputFile, $buffer, FILE_APPEND);
+        });
 
-        return $return;
+        return $process->getExitCode();
     }
 
     /**
